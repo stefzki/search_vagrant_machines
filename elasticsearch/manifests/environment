@@ -1,0 +1,6 @@
+JAVA_HOME=/opt/jdk7
+JAVA_BIN=/opt/jdk7/bin
+PATH="/opt/jdk7/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+ES_MIN_MEM=368
+ES_MAX_MEM=368
+

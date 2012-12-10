@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+
+config.vm.customize ["modifyvm", :id, "--memory", 512]
+
+  servers = {
+    :es01 => {:network => "12.0.0.20"},
+    :es02 => {:network => "12.0.0.21"},
+    :es03 => {:network => "12.0.0.22"},
+  }
+
+  servers.each do |name, opts|
+	  config.vm.define name do |es| 
+	    es.vm.box = "precise64"
+	    es.vm.box_url = "http://files.vagrantup.com/precise64.box"
+# switch to hostonly, if you want to use it on your own machine only
+#	    es.vm.network :hostonly, opts[:network]
+	    es.vm.network :bridged
+# if hostonly mode is used, please enable facter 
+#	    es.vm.provision :puppet, :facter => { "es_ip" => "#{opts[:network]}" }  do |puppet|
+	    es.vm.provision :puppet do |puppet|
+	      puppet.manifests_path = "manifests"
+	      puppet.manifest_file  = "es.pp"
+	    end
+	  end
+  end  
+  
+end
