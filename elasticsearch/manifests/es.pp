@@ -58,7 +58,7 @@ file { '/etc/environment':
 }
 
 exec { 'wget':
-	command => 'wget -O /vagrant/elasticsearch.deb https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.20.4.deb',
+	command => 'wget -O /vagrant/elasticsearch.deb http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.4.deb',
 	path    => '/usr/local/bin/:/bin/:/usr/bin/',
 	creates => '/vagrant/elasticsearch.deb', 	
 	require => [ Package['java7-runtime-headless'], Exec['update'], File['/etc/environment'] ],
